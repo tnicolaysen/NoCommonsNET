@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertionUtils.cs" />
+    <Compile Include="Banking\KontonummerTests.cs" />
     <Compile Include="Banking\IbanValidationTests.cs" />
     <Compile Include="Banking\KidnummerValidatorTests.cs" />
     <Compile Include="Banking\KontonrValideringTests.cs" />

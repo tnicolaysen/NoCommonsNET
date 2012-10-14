@@ -3,37 +3,59 @@ using NoCommons.Common;
 
 namespace NoCommons.Banking
 {
-    public class Kontonummer : StringNumber {
-        
-        public Kontonummer(string kontonummer) : base(kontonummer) {
-            
+    public class Kontonummer : StringNumber
+    {
+        public Kontonummer(string kontonummer) : base(kontonummer)
+        {
         }
 
-        public string GetRegisternummer() {
+        /// <summary>
+        /// Gets the bank's registration number from the kontonummer.
+        /// </summary>
+        /// <returns>
+        /// 'xxxx' if the kontonummer is 'xxxx.yy.zzzzc'
+        /// </returns>
+        public string GetRegisternummer()
+        {
             return GetValue().Substring(0, 4);
         }
 
-        public string GetAccountType() {
+        /// <summary>
+        /// Gets the account group from the kontonummer.
+        /// </summary>
+        /// <returns>
+        /// 'yy' if the kontonummer is 'xxxx.yy.zzzzc'
+        /// </returns>
+        public string GetKontogruppe()
+        {
             return GetValue().Substring(4, 2);
         }
 
-        public string GetKonto() {
-            return GetValue().Substring(4, 6);
+        /// <summary>
+        /// Gets the customer account number from the kontonummer.
+        /// </summary>
+        /// <returns>
+        /// 'zzzzc' if the kontonummer is 'xxxx.yy.zzzzc'
+        /// </returns>
+        public string GetKundenummer()
+        {
+            return GetValue().Substring(6, 5);
         }
 
-        public string GetGroupedValue() {
-            var sb = new StringBuilder();
-            sb.Append(GetRegisternummer()).Append(Constants.DOT);
-            sb.Append(GetAccountType()).Append(Constants.DOT);
-            sb.Append(GetPartAfterAccountType());
-            return sb.ToString();
+        /// <summary>
+        /// Gets the control digit from the kontonummer.
+        /// </summary>
+        /// <returns>
+        /// 'c' if the kontonummer is 'xxxx.yy.zzzzc'
+        /// </returns>
+        public string GetKontrollsiffer()
+        {
+            return GetValue().Substring(10, 1);
         }
 
-        private string GetPartAfterAccountType() {
-            return GetValue().Substring(6);
+        public string GetGroupedValue()
+        {
+            return string.Format("{0}.{1}.{2}", GetRegisternummer(), GetKontogruppe(), GetKundenummer());
         }
-
     }
-
- 
 }

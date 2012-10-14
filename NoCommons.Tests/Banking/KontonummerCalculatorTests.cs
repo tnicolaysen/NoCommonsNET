@@ -29,7 +29,7 @@ namespace NoCommons.Tests.Banking
             foreach (Kontonummer option in options)
             {
                 Assert.IsTrue(KontonummerValidator.IsValid(option.ToString()), "Invalid kontonr. ");
-                Assert.IsTrue(option.GetAccountType().Equals(TEST_ACCOUNT_TYPE), "Invalid account type. ");
+                Assert.IsTrue(option.GetKontogruppe().Equals(TEST_ACCOUNT_TYPE), "Invalid account type. ");
             }
         }
 
