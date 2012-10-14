@@ -25,7 +25,7 @@ namespace NoCommons.Tests.Banking
                 KidnummerValidator.ValidateSyntax("");
                 Assert.Fail();
             } catch (ArgumentException e) {
-                assertMessageContains(e, StringNumberValidator.ERROR_SYNTAX);
+                assertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
         }
 
@@ -35,7 +35,7 @@ namespace NoCommons.Tests.Banking
                 KidnummerValidator.ValidateSyntax("abcdefghijk");
                 Assert.Fail();
             } catch (ArgumentException e) {
-                assertMessageContains(e, StringNumberValidator.ERROR_SYNTAX);
+                assertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
         }
 
@@ -45,7 +45,7 @@ namespace NoCommons.Tests.Banking
                 KidnummerValidator.ValidateSyntax(KIDNUMMER_INVALID_LENGTH_SHORT);
                 Assert.Fail();
             } catch (ArgumentException e) {
-                assertMessageContains(e, KidnummerValidator.ERROR_LENGTH);
+                assertMessageContains(e, KidnummerValidator.LenghtErrorMessage);
             }
         }
 
@@ -55,7 +55,7 @@ namespace NoCommons.Tests.Banking
                 KidnummerValidator.ValidateSyntax(KIDNUMMER_INVALID_LENGTH_LONG);
                 Assert.Fail();
             } catch (ArgumentException e) {
-                assertMessageContains(e, KidnummerValidator.ERROR_LENGTH);
+                assertMessageContains(e, KidnummerValidator.LenghtErrorMessage);
             }
         }
 
@@ -65,7 +65,7 @@ namespace NoCommons.Tests.Banking
                 KidnummerValidator.ValidateChecksum(KIDNUMMER_INVALID_CHECKSUM);
                 Assert.Fail();
             } catch (ArgumentException e) {
-                assertMessageContains(e, StringNumberValidator.ERROR_INVALID_CHECKSUM);
+                assertMessageContains(e, StringNumberValidator.InvalidChecksumErrorMessage);
             }
         }
 

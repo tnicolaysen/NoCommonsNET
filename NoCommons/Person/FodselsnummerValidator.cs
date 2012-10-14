@@ -79,7 +79,7 @@ namespace NoCommons.Person
             int k1 = CalculateFirstChecksumDigit(fnr);
             int k2 = CalculateSecondChecksumDigit(fnr);
             if (k1 != fnr.getChecksumDigit1() || k2 != fnr.getChecksumDigit2()) {
-                throw new ArgumentException(ERROR_INVALID_CHECKSUM + fodselsnummer);
+                throw new ArgumentException(InvalidChecksumErrorMessage + fodselsnummer);
             }
         }
 

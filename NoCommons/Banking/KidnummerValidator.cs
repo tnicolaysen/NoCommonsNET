@@ -3,22 +3,18 @@ using NoCommons.Common;
 
 namespace NoCommons.Banking
 {
-    /**
-     * This class represent a Norwegian KID-nummer - a number used to identify 
-     * a customer on invoices. A Kidnummer consists of digits only, and the last
-     * digit is a checksum digit (either mod10 or mod11).
-     */
+    /// <summary>
+    /// Validates <see cref="Kidnummer"/>.
+    /// </summary>
     public class KidnummerValidator : StringNumberValidator {
 
-        public const string ERROR_LENGTH = "A Kidnummer is between 2 and 25 digits";
+        public const string LenghtErrorMessage = "A valid kidnummer is between 2 and 25 digits";
 
-        /**
-	     * Return true if the provided String is a valid KID-nummmer.
-	     * 
-	     * @param kidnummer
-	     *            A String containing a Kidnummer
-	     * @return true or false
-	     */
+        /// <summary>
+        /// Return true if the provided String is a valid KID-nummmer.
+        /// </summary>
+        /// <param name="kidnummer">String representing a Kidnummer</param>
+        /// <returns>True if valid</returns>
         public static bool IsValid(String kidnummer) {
             try {
                 GetKidnummer(kidnummer);
@@ -50,7 +46,7 @@ namespace NoCommons.Banking
 
         private static void ValidateLengthInRange(string kidnummer, int i, int j) {
             if (kidnummer == null || kidnummer.Length < i || kidnummer.Length > j) {
-                throw new ArgumentException(ERROR_LENGTH);
+                throw new ArgumentException(LenghtErrorMessage);
             }
         }
 
@@ -59,7 +55,7 @@ namespace NoCommons.Banking
             int kMod10 = CalculateMod10CheckSum(GetMod10Weights(k), k);
             int kMod11 = CalculateMod11CheckSum(GetMod11Weights(k), k);
             if (kMod10 != k.GetChecksumDigit() && kMod11 != k.GetChecksumDigit()) {
-                throw new ArgumentException(ERROR_INVALID_CHECKSUM + kidnummer);
+                throw new ArgumentException(InvalidChecksumErrorMessage + kidnummer);
             }
         }
 

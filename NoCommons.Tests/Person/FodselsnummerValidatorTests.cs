@@ -17,7 +17,7 @@ namespace NoCommons.Tests.Person
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, FodselsnummerValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, FodselsnummerValidator.SyntaxErrorMessage);
             }
         }
 
@@ -31,7 +31,7 @@ namespace NoCommons.Tests.Person
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, FodselsnummerValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, FodselsnummerValidator.SyntaxErrorMessage);
             }
         }
 
@@ -129,7 +129,7 @@ namespace NoCommons.Tests.Person
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, FodselsnummerValidator.ERROR_INVALID_CHECKSUM);
+                AssertionUtils.AssertMessageContains(e, FodselsnummerValidator.InvalidChecksumErrorMessage);
             }
         }
 

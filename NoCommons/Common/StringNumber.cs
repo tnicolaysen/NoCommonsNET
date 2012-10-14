@@ -4,14 +4,14 @@ namespace NoCommons.Common
 {
     public abstract class StringNumber {
 
-        private readonly string value;
+        private readonly string _value;
 
         protected StringNumber(string value) {
-            this.value = value;
+            this._value = value;
         }
 
         public string GetValue() {
-            return value;
+            return _value;
         }
 
         public int GetAt(int i) {
@@ -25,7 +25,7 @@ namespace NoCommons.Common
         public override int GetHashCode() {
             const int prime = 31;
             int result = 1;
-            result = prime * result + ((value == null) ? 0 : value.GetHashCode());
+            result = prime * result + ((_value == null) ? 0 : _value.GetHashCode());
             return result;
         }
 
@@ -40,11 +40,11 @@ namespace NoCommons.Common
                 return false;
             }
             var other = (StringNumber) obj;
-            if (value == null) {
-                if (other.value != null) {
+            if (_value == null) {
+                if (other._value != null) {
                     return false;
                 }
-            } else if (!value.Equals(other.value)) {
+            } else if (!_value.Equals(other._value)) {
                 return false;
             }
             return true;

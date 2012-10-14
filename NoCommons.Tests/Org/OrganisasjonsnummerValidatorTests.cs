@@ -22,7 +22,7 @@ namespace NoCommons.Tests.Org
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, OrganisasjonsnummerValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, OrganisasjonsnummerValidator.SyntaxErrorMessage);
             }
         }
 
@@ -36,7 +36,7 @@ namespace NoCommons.Tests.Org
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, OrganisasjonsnummerValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, OrganisasjonsnummerValidator.SyntaxErrorMessage);
             }
         }
 
@@ -50,7 +50,7 @@ namespace NoCommons.Tests.Org
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, OrganisasjonsnummerValidator.ERROR_INVALID_CHECKSUM);
+                AssertionUtils.AssertMessageContains(e, OrganisasjonsnummerValidator.InvalidChecksumErrorMessage);
             }
         }
 
