@@ -52,7 +52,7 @@ namespace NoCommons.Banking
 		    var k = new Kontonummer(kontonummer);
 		    int k1 = CalculateMod11CheckSum(GetMod11Weights(k), k);
 		    if (k1 != k.GetChecksumDigit()) {
-			    throw new ArgumentException(ERROR_INVALID_CHECKSUM + kontonummer);
+			    throw new ArgumentException(InvalidChecksumErrorMessage + kontonummer);
 		    }
 	    }
 

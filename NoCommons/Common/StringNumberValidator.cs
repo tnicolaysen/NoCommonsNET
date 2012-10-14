@@ -3,18 +3,17 @@ using System.Linq;
 
 namespace NoCommons.Common
 {
-    public abstract class StringNumberValidator {
+    public abstract class StringNumberValidator
+    {
+        public const string InvalidChecksumErrorMessage = "Invalid checksum : ";
+        public const string SyntaxErrorMessage = "Only digits are allowed : ";
 
-       public static string ERROR_INVALID_CHECKSUM = "Invalid checksum : ";
-
-       public static string ERROR_SYNTAX = "Only digits are allowed : ";
-
-       private static readonly int[] BASE_MOD11_WEIGHTS = new []{2, 3, 4, 5, 6, 7};
+        private static readonly int[] BaseMod11Weights = new[] {2, 3, 4, 5, 6, 7};
         
        protected static int CalculateMod11CheckSum(int[] weights, StringNumber number) {
           int c = CalculateChecksum(weights, number, false) % 11;
           if (c == 1) {
-             throw new ArgumentException(ERROR_INVALID_CHECKSUM + number);
+             throw new ArgumentException(InvalidChecksumErrorMessage + number);
           }
           return c == 0 ? 0 : 11 - c;
        }
@@ -40,17 +39,17 @@ namespace NoCommons.Common
        protected static void ValidateLengthAndAllDigits(string numberString,
                                                         int length) {
           if (numberString == null || numberString.Length != length) {
-             throw new ArgumentException(ERROR_SYNTAX + numberString);
+             throw new ArgumentException(SyntaxErrorMessage + numberString);
           }
           ValidateAllDigits(numberString);
        }
 
        protected static void ValidateAllDigits(string numberString) {
            if (numberString == null || numberString.Length <= 0) {
-             throw new ArgumentException(ERROR_SYNTAX + numberString);
+             throw new ArgumentException(SyntaxErrorMessage + numberString);
           }
            if (numberString.Any(t => !char.IsDigit((t)))) {
-               throw new ArgumentException(ERROR_SYNTAX + numberString);
+               throw new ArgumentException(SyntaxErrorMessage + numberString);
            }
        }
 
@@ -69,8 +68,8 @@ namespace NoCommons.Common
        protected static int[] GetMod11Weights(StringNumber k) {
           var weights = new int[k.GetLength() - 1];
           for (int i = 0; i < weights.Length; i++) {
-             int j = i % BASE_MOD11_WEIGHTS.Length;
-             weights[i] = BASE_MOD11_WEIGHTS[j];
+             int j = i % BaseMod11Weights.Length;
+             weights[i] = BaseMod11Weights[j];
           }
           return weights;
        }

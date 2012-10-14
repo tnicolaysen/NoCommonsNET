@@ -22,7 +22,7 @@ namespace NoCommons.Tests.Banking
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, StringNumberValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
         }
 
@@ -36,7 +36,7 @@ namespace NoCommons.Tests.Banking
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, StringNumberValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
         }
 
@@ -50,7 +50,7 @@ namespace NoCommons.Tests.Banking
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, StringNumberValidator.ERROR_INVALID_CHECKSUM);
+                AssertionUtils.AssertMessageContains(e, StringNumberValidator.InvalidChecksumErrorMessage);
             }
         }
 
@@ -69,7 +69,7 @@ namespace NoCommons.Tests.Banking
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, StringNumberValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
         }
 
@@ -88,7 +88,7 @@ namespace NoCommons.Tests.Banking
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, StringNumberValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
         }
 
@@ -107,7 +107,7 @@ namespace NoCommons.Tests.Banking
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, StringNumberValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
         }
 
@@ -126,7 +126,7 @@ namespace NoCommons.Tests.Banking
             }
             catch (ArgumentException e)
             {
-                AssertionUtils.AssertMessageContains(e, StringNumberValidator.ERROR_SYNTAX);
+                AssertionUtils.AssertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
         }
 

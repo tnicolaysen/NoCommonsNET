@@ -87,7 +87,7 @@ namespace NoCommons.Org
             int k1 = CalculateMod11CheckSum(GetMod11Weights(onr), onr);
             if (k1 != onr.GetChecksumDigit())
             {
-                throw new ArgumentException(ERROR_INVALID_CHECKSUM + organisasjonsnummer);
+                throw new ArgumentException(InvalidChecksumErrorMessage + organisasjonsnummer);
             }
         }
     }
