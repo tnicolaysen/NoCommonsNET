@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using NoCommons.Banking;
 
@@ -7,46 +8,56 @@ namespace NoCommons.Tests.Banking
     [TestFixture]
     public class KontonummerCalculatorTests
     {
-        private const int LIST_LENGTH = 100;
-        private const string TEST_ACCOUNT_TYPE = "45";
-        private const string TEST_REGISTERNUMMER = "9710";
+        private const int AmountOfKontonummerToCreate = 100;
+        private const string TestKontogruppe = "45";
+        private const string TestRegisternummer = "9710";
 
         [Test]
-        public void testGetKontonummerList()
+        public void Should_get_a_list_of_randomly_created_kontonummer_that_are_all_valid()
         {
-            var options = KontonummerFactory.GetKontonummerList(LIST_LENGTH);
-            Assert.AreEqual(LIST_LENGTH, options.Count());
-            foreach (Kontonummer k in options)
-            {
-                Assert.IsTrue(KontonummerValidator.IsValid(k.ToString()));
-            }
+            var kontonummer = KontonummerFactory.GetKontonummerList(AmountOfKontonummerToCreate).ToList();
+
+            Assert.That(kontonummer.Count, Is.EqualTo(AmountOfKontonummerToCreate));
+            Assert.That(AllKontonummerIsValid(kontonummer), Is.True, "One or more kontonummer was not valid");
         }
 
         [Test]
-        public void testGetKontonummerListForAccountType()
+        public void Should_get_a_list_of_randomly_created_kontonummer_for_a_given_kontogruppe_that_are_all_valid()
         {
-            var options = KontonummerFactory.GetKontonummerListForAccountType(TEST_ACCOUNT_TYPE, LIST_LENGTH);
-            Assert.AreEqual(LIST_LENGTH, options.Count());
-            foreach (Kontonummer option in options)
-            {
-                Assert.IsTrue(KontonummerValidator.IsValid(option.ToString()), "Invalid kontonr. ");
-                Assert.IsTrue(option.GetKontogruppe().Equals(TEST_ACCOUNT_TYPE), "Invalid account type. ");
-            }
+            var kontonummer = KontonummerFactory.GetKontonummerListForAccountType(TestKontogruppe, AmountOfKontonummerToCreate).ToList();
+
+            Assert.That(kontonummer.Count, Is.EqualTo(AmountOfKontonummerToCreate));
+            Assert.That(AllKontonummerIsValid(kontonummer), Is.True, "One or more kontonummer was not valid");
+            Assert.That(AllKontonummerContainsKontogruppe(kontonummer), Is.True, "One or more kontonummer did not contain the correct kontogruppenummer");
         }
 
         [Test]
-        public void testGetKontonummerListForRegisternummer()
+        public void Should_get_a_list_of_randomly_created_kontonummer_for_a_given_registernummer_that_are_all_valid()
         {
-            var options = KontonummerFactory.GetKontonummerListForRegisternummer(TEST_REGISTERNUMMER, LIST_LENGTH);
-            Assert.AreEqual(LIST_LENGTH, options.Count());
-            foreach (Kontonummer option in options)
-            {
-                
-                Assert.IsTrue(KontonummerValidator.IsValid(option.ToString()));
-                Assert.IsTrue(option.GetRegisternummer().Equals(TEST_REGISTERNUMMER));
-            }
+            var kontonummer = KontonummerFactory.GetKontonummerListForRegisternummer(TestRegisternummer, AmountOfKontonummerToCreate).ToList();
+
+            Assert.That(kontonummer.Count, Is.EqualTo(AmountOfKontonummerToCreate));
+            Assert.That(AllKontonummerIsValid(kontonummer), Is.True, "One or more kontonummer was not valid");
+            Assert.That(AllKontonummerContainsRegisternummer(kontonummer), Is.True, "One or more kontonummer did not contain the correct registernummer");
         }
+
+        #region Helpers
+
+        private static bool AllKontonummerIsValid(IEnumerable<Kontonummer> kontonummer)
+        {
+            return kontonummer.All(k => KontonummerValidator.IsValid(k.ToString()));
+        }
+
+        private static bool AllKontonummerContainsKontogruppe(IEnumerable<Kontonummer> kontonummer)
+        {
+            return kontonummer.All(k => string.Equals(k.GetKontogruppe(), TestKontogruppe));
+        }
+
+        private static bool AllKontonummerContainsRegisternummer(IEnumerable<Kontonummer> kontonummer)
+        {
+            return kontonummer.All(k => string.Equals(k.GetRegisternummer(), TestRegisternummer));
+        }
+
+        #endregion
     }
-
-
 }
