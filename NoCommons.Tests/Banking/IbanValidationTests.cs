@@ -8,7 +8,6 @@ namespace NoCommons.Tests.Banking
     {
         /// Structure for IBAN in a lot of counties are found here:
         /// URL: http://www.ecbs.org/iban.htm
-        
         [TestCase("NO9386011117947", "Norway")]
         [TestCase("NO4912345678911", "Norway")]
         [TestCase("NO7112345678903", "Norway")]
@@ -30,6 +29,5 @@ namespace NoCommons.Tests.Banking
         {
             Assert.IsFalse(IbanValidator.IsValid(ibanValue), string.Format("Valid when {0}. ", reason));
         }
-
     }
 }
