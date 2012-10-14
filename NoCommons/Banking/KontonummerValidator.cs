@@ -3,61 +3,70 @@ using NoCommons.Common;
 
 namespace NoCommons.Banking
 {
-    public class KontonummerValidator : StringNumberValidator {
+    public class KontonummerValidator : StringNumberValidator
+    {
+        private const int KontoNrLength = 11;
+        internal const int KontogruppeNumDigits = 2;
+        internal const int RegisternummerNumDigits = 4;
 
-	    private const int LENGTH = 11;
-        public static int ACCOUNTTYPE_NUM_DIGITS = 2;
-        public static int REGISTERNUMMER_NUM_DIGITS = 4;
-        
-	    public static bool IsValid(string kontonummer) {
-		    try {
-			    GetKontonummer(kontonummer);
-			    return true;
-		    } catch (ArgumentException) {
-			    return false;
-		    }
-	    }
+        public static bool IsValid(string kontonummer)
+        {
+            try
+            {
+                GetKontonummer(kontonummer);
+                return true;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+        }
 
-	    public static Kontonummer GetKontonummer(string kontonummer){
-		    ValidateSyntax(kontonummer);
-		    ValidateChecksum(kontonummer);
-		    return new Kontonummer(kontonummer);
-	    }
+        public static Kontonummer GetKontonummer(string kontonummer)
+        {
+            ValidateSyntax(kontonummer);
+            ValidateChecksum(kontonummer);
+            return new Kontonummer(kontonummer);
+        }
 
-	    public static Kontonummer GetAndForceValidKontonummer(string kontonummer) {
-		    ValidateSyntax(kontonummer);
-		    try {
-			    ValidateChecksum(kontonummer);
-		    } catch (ArgumentException) {
-			    var k = new Kontonummer(kontonummer);
-			    int checksum = CalculateMod11CheckSum(GetMod11Weights(k), k);
-			    kontonummer = kontonummer.Substring(0, LENGTH - 1) + checksum;
-		    }
-		    return new Kontonummer(kontonummer);
-	    }
+        public static Kontonummer GetAndForceValidKontonummer(string kontonummer)
+        {
+            ValidateSyntax(kontonummer);
+            try
+            {
+                ValidateChecksum(kontonummer);
+            }
+            catch (ArgumentException)
+            {
+                var k = new Kontonummer(kontonummer);
+                int checksum = CalculateMod11CheckSum(GetMod11Weights(k), k);
+                kontonummer = kontonummer.Substring(0, KontoNrLength - 1) + checksum;
+            }
+            return new Kontonummer(kontonummer);
+        }
 
-        internal static void ValidateSyntax(string kontonummer) {
-		    ValidateLengthAndAllDigits(kontonummer, LENGTH);
-	    }
+        internal static void ValidateSyntax(string kontonummer)
+        {
+            ValidateLengthAndAllDigits(kontonummer, KontoNrLength);
+        }
 
-        internal static void ValidateAccountTypeSyntax(string accountType) {
-		    ValidateLengthAndAllDigits(accountType, ACCOUNTTYPE_NUM_DIGITS);
-	    }
+        internal static void ValidateAccountTypeSyntax(string kontogruppe)
+        {
+            ValidateLengthAndAllDigits(kontogruppe, KontogruppeNumDigits);
+        }
 
-        internal static void ValidateRegisternummerSyntax(string registernummer) {
-		    ValidateLengthAndAllDigits(registernummer, REGISTERNUMMER_NUM_DIGITS);
-	    }
+        internal static void ValidateRegisternummerSyntax(string registernummer)
+        {
+            ValidateLengthAndAllDigits(registernummer, RegisternummerNumDigits);
+        }
 
-        internal static void ValidateChecksum(string kontonummer) {
-		    var k = new Kontonummer(kontonummer);
-		    int k1 = CalculateMod11CheckSum(GetMod11Weights(k), k);
-		    if (k1 != k.GetChecksumDigit()) {
-			    throw new ArgumentException(InvalidChecksumErrorMessage + kontonummer);
-		    }
-	    }
-
+        internal static void ValidateChecksum(string kontonummer)
+        {
+            var kontonummerInstance = new Kontonummer(kontonummer);
+            
+            int k1 = CalculateMod11CheckSum(GetMod11Weights(kontonummerInstance), kontonummerInstance);
+            if (k1 != kontonummerInstance.GetChecksumDigit()) 
+                throw new ArgumentException(InvalidChecksumErrorMessage + kontonummer);
+        }
     }
-
-
-
 }
