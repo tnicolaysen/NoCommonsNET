@@ -10,6 +10,8 @@ namespace NoCommons.Tests.Banking
         /// URL: http://www.ecbs.org/iban.htm
         
         [TestCase("NO9386011117947", "Norway")]
+        [TestCase("NO4912345678911", "Norway")]
+        [TestCase("NO7112345678903", "Norway")]
         [TestCase("ES9121000418450200051332", "Spain")]
         public void TestValidNorwegianIban(string ibanValue, string country)
         {
@@ -21,6 +23,7 @@ namespace NoCommons.Tests.Banking
         [TestCase("no9386011117947", "Lower case country code")]
         [TestCase("9386011117947", "Missing country code")]
         [TestCase("NO938601111794", "Missing end digit")]
+        [TestCase("NO428601111794", "Wrong checksum")]
         [TestCase("", "Empty string")]
         [TestCase(null, "null")]
         public void InvalidIbansReturnsFalse(string ibanValue, string reason)
