@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Banking\Kidnummer.cs" />
     <Compile Include="Banking\KidnummerValidator.cs" />
-    <Compile Include="Banking\KontonummerCalculator.cs" />
+    <Compile Include="Banking\KontonummerFactory.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Banking\IbanValidator.cs" />
     <Compile Include="Banking\Kontonummer.cs" />
@@ -62,11 +62,7 @@
     <Compile Include="Person\FodselsnummerValidator.cs" />
     <Compile Include="Person\KJONN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Resources\Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NoCommons.nuspec">
@@ -74,14 +70,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\tilbud5.txt" />
+    <Content Include="Resources\tilbud5.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
