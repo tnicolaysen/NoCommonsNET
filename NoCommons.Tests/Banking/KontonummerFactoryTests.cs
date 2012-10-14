@@ -6,7 +6,7 @@ using NoCommons.Banking;
 namespace NoCommons.Tests.Banking
 {
     [TestFixture]
-    public class KontonummerCalculatorTests
+    public class KontonummerFactoryTests
     {
         private const int AmountOfKontonummerToCreate = 100;
         private const string TestKontogruppe = "45";
