@@ -8,80 +8,42 @@ namespace NoCommons.Tests.Banking
     [TestFixture]
     public class KidnummerValidatorTests
     {
-        private const string KIDNUMMER_VALID_MOD10 = "2345676";
-        private const string KIDNUMMER_VALID_MOD11 = "12345678903";
-        private const string KIDNUMMER_INVALID_CHECKSUM = "2345674";
-        private const string KIDNUMMER_INVALID_LENGTH_SHORT = "1";
-        private const string KIDNUMMER_INVALID_LENGTH_LONG = "12345678901234567890123456";
-        
-        protected void assertMessageContains(ArgumentException e, String message)
+        [TestCase("2345676", "Valid MOD10")]
+        [TestCase("12345678903", "Valid MOD11")]
+        public void TestValidKidnummmer(string kidnummer, string description)
         {
-            Assert.IsTrue(e.Message.Contains(message));
+            Assert.IsTrue(KidnummerValidator.IsValid(kidnummer), description);
         }
 
-        [Test]
-        public void testInvalidKidnummer() {
-            try {
-                KidnummerValidator.ValidateSyntax("");
-                Assert.Fail();
-            } catch (ArgumentException e) {
-                assertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
+        [TestCase("", "Blank (invalid) kidnummer")]
+        [TestCase("abcdefghijk", "No digits")]
+        [TestCase("2345674", "Invalid checksum")]
+        public void TestInvalidKidnummmer(string kidnummer, string description)
+        {
+            try
+            {
+                bool validationResult = KidnummerValidator.IsValid(kidnummer);
+                Assert.IsFalse(validationResult, description);
+            }
+            catch (ArgumentException e)
+            {
+                Assert.That(e.Message, Is.StringContaining(StringNumberValidator.SyntaxErrorMessage));
             }
         }
 
-        [Test]
-        public void testInvalidKidnummerNotDigits() {
-            try {
-                KidnummerValidator.ValidateSyntax("abcdefghijk");
+        [TestCase("1", "Too short")]
+        [TestCase("12345678901234567890123456", "Too long")]
+        public void TestKidnummerLengthValidation(string kidnummer, string description)
+        {
+            try
+            {
+                KidnummerValidator.ValidateSyntax(kidnummer);
                 Assert.Fail();
-            } catch (ArgumentException e) {
-                assertMessageContains(e, StringNumberValidator.SyntaxErrorMessage);
             }
-        }
-
-        [Test]
-        public void testInvalidKidnummerTooShort() {
-            try {
-                KidnummerValidator.ValidateSyntax(KIDNUMMER_INVALID_LENGTH_SHORT);
-                Assert.Fail();
-            } catch (ArgumentException e) {
-                assertMessageContains(e, KidnummerValidator.LenghtErrorMessage);
+            catch (ArgumentException e)
+            {
+                Assert.That(e.Message, Is.StringContaining(KidnummerValidator.LenghtErrorMessage));
             }
-        }
-
-        [Test]
-        public void testInvalidKidnummerTooLong() {
-            try {
-                KidnummerValidator.ValidateSyntax(KIDNUMMER_INVALID_LENGTH_LONG);
-                Assert.Fail();
-            } catch (ArgumentException e) {
-                assertMessageContains(e, KidnummerValidator.LenghtErrorMessage);
-            }
-        }
-
-        [Test]
-        public void testInvalidKidnummerWrongChecksum() {
-            try {
-                KidnummerValidator.ValidateChecksum(KIDNUMMER_INVALID_CHECKSUM);
-                Assert.Fail();
-            } catch (ArgumentException e) {
-                assertMessageContains(e, StringNumberValidator.InvalidChecksumErrorMessage);
-            }
-        }
-
-        [Test]
-        public void testIsValidMod10() {
-            Assert.IsTrue(KidnummerValidator.IsValid(KIDNUMMER_VALID_MOD10));
-        }
-
-        [Test]
-        public void testIsValidMod11() {
-            Assert.IsTrue(KidnummerValidator.IsValid(KIDNUMMER_VALID_MOD11));
-        }
-
-        [Test]
-        public void testIsInvalid() {
-            Assert.IsFalse(KidnummerValidator.IsValid(KIDNUMMER_INVALID_CHECKSUM));
         }
     }
 }
