@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Banking\Kidnummer.cs" />
     <Compile Include="Banking\KidnummerValidator.cs" />
-    <Compile Include="Banking\KontonummerCalculator.cs" />
+    <Compile Include="Banking\KontonummerFactory.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Banking\IbanValidator.cs" />
     <Compile Include="Banking\Kontonummer.cs" />

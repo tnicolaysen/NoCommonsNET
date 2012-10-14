@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using NoCommons.Banking;
 
 namespace NoCommons.Tests.Banking
@@ -13,8 +14,8 @@ namespace NoCommons.Tests.Banking
         [Test]
         public void testGetKontonummerList()
         {
-            var options = KontonummerCalculator.GetKontonummerList(LIST_LENGTH);
-            Assert.AreEqual(LIST_LENGTH, options.Count);
+            var options = KontonummerFactory.GetKontonummerList(LIST_LENGTH);
+            Assert.AreEqual(LIST_LENGTH, options.Count());
             foreach (Kontonummer k in options)
             {
                 Assert.IsTrue(KontonummerValidator.IsValid(k.ToString()));
@@ -24,8 +25,8 @@ namespace NoCommons.Tests.Banking
         [Test]
         public void testGetKontonummerListForAccountType()
         {
-            var options = KontonummerCalculator.GetKontonummerListForAccountType(TEST_ACCOUNT_TYPE, LIST_LENGTH);
-            Assert.AreEqual(LIST_LENGTH, options.Count);
+            var options = KontonummerFactory.GetKontonummerListForAccountType(TEST_ACCOUNT_TYPE, LIST_LENGTH);
+            Assert.AreEqual(LIST_LENGTH, options.Count());
             foreach (Kontonummer option in options)
             {
                 Assert.IsTrue(KontonummerValidator.IsValid(option.ToString()), "Invalid kontonr. ");
@@ -36,8 +37,8 @@ namespace NoCommons.Tests.Banking
         [Test]
         public void testGetKontonummerListForRegisternummer()
         {
-            var options = KontonummerCalculator.GetKontonummerListForRegisternummer(TEST_REGISTERNUMMER, LIST_LENGTH);
-            Assert.AreEqual(LIST_LENGTH, options.Count);
+            var options = KontonummerFactory.GetKontonummerListForRegisternummer(TEST_REGISTERNUMMER, LIST_LENGTH);
+            Assert.AreEqual(LIST_LENGTH, options.Count());
             foreach (Kontonummer option in options)
             {
                 
