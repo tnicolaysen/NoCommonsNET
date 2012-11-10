@@ -35,21 +35,20 @@ namespace NoCommons.Mail
                         postnummerList.Add(pn);
                     }
 
-
-                    poststedMap.Add(ps, postnummerList);
-
-                    // add to postnummerMap
-                    var alreadyExists = postnummerMap.ContainsKey(pn);
-                    
-                    if (alreadyExists)
+                    if(poststedMap.ContainsKey((ps)))
                     {
-
+                        poststedMap[ps] = postnummerList;
                     }
                     else
                     {
+                        poststedMap.Add(ps, postnummerList);
+                    }
+                    
+                    // add to postnummerMap
+                    if (!postnummerMap.ContainsKey(pn))
+                    {
                         postnummerMap.Add(pn, ps);
                     }
-
                 }
             }
             MailValidator.setPoststedMap(poststedMap);
