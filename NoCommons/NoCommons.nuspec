@@ -9,8 +9,8 @@
     <projectUrl>https://github.com/bekkopen/NoCommonsNET</projectUrl>    
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Norwegian account validator and IBAN validator added</releaseNotes>
-    <copyright>Copyright 2012</copyright>
-    <tags>norway norwegian konto bank validation accounting account</tags>
+    <releaseNotes>Added date util. Get holidays for a given year. Get or add working days to a given date. </releaseNotes>
+    <copyright>Copyright BEKK Open 2012</copyright>
+    <tags>norway norwegian kontonummer fodselsnummer kidnummer organisasjonsnummer validation generators calculator holidays easter christmas</tags>
   </metadata>
 </package>
